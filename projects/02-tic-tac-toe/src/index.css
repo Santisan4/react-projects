@@ -81,9 +81,14 @@ body {
   border-color: transparent;
 }
 
-.square.is-selected {
+.square.is-selected:nth-child(1) {
+  background-color: crimson;
   color: #fff;
-  background: #09f;
+}
+
+.square.is-selected:nth-child(2) {
+  background-color: cornflowerblue;
+  color: #fff;
 }
 
 .winner {
@@ -113,10 +118,18 @@ body {
 .winner .win {
   margin: 0 auto;
   width: fit-content;
-  border: 2px solid #eee;
+  border: 1px #eee;
   border-radius: 10px;
   display: flex;
   gap: 15px;
+}
+
+.x {
+  background-color: crimson;
+}
+
+.o {
+  background-color: cornflowerblue;
 }
 
 .square {
@@ -128,4 +141,25 @@ body {
   place-items: center;
   cursor: pointer;
   font-size: 48px;
+}
+
+.score-board {
+  width: 320;
+  display: grid;
+  grid-auto-flow: column;
+  margin-top: 5px;
+}
+
+.score-board div {
+  color: white;
+  text-align: center;
+  font-size: 2em;
+  padding: 5px;
+  font-weight: bold;
+  background-color: cornflowerblue;
+}
+
+.score-board div:first-child {
+  background-color: crimson;
+  color: white;
 }
