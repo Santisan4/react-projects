@@ -88,7 +88,7 @@ function App () {
     <main className='board'>
       <h1>Tic Tac Toe</h1>
       {/* <button onClick={resetGame}>Empezar </button> */}
-      <button onClick={resetCounter}>Reset scores</button>
+      <button onClick={resetCounter}>Reset Game</button>
       <section className='game'>
         {
           board.map((square, index) => {
