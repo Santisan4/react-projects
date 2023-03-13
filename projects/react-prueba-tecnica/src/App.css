@@ -1,0 +1,39 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  margin: 0 auto;
+  font-family: system-ui;
+  gap: 10px;
+  background-color: aliceblue;
+  padding: 20px;
+}
+
+main h1 {
+  margin: 0;
+  padding: 0;
+}
+
+main button {
+  border-radius: 10px;
+  border: 0px;
+  padding: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  background-color: black;
+}
+
+main img {
+  border-radius: 10px;
+  width: 500px;
+  height: 500px;
+}
