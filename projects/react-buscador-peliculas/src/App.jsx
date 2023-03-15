@@ -10,15 +10,17 @@ export function App () {
   const [sort, setSort] = useState(false)
 
   const { search, setSearch, error } = useSearch()
-  const { movies, getMovies, loading } = useMovies({ search, sort })
+  const { movies, getMovies, loading, setPage, page } = useMovies({ search, sort })
 
   const debouncedGetMovies = useCallback(debounce(search => {
     getMovies({ search })
-  }, 300)
+  }, 400)
   , [getMovies])
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    const resetPage = 1
+    setPage(resetPage)
     getMovies({ search })
   }
 
@@ -30,6 +32,14 @@ export function App () {
 
   const handleSort = () => {
     setSort(!sort)
+  }
+
+  const nextPage = () => {
+    setPage(prevPage => prevPage + 1)
+  }
+
+  const prevPage = () => {
+    setPage(prevPage => prevPage - 1)
   }
 
   return (
@@ -53,8 +63,11 @@ export function App () {
 
       <main>
         {
-          loading ? <p>Cargando...</p> : <Movies movies={movies} />
+          loading
+            ? <p>Cargando...</p>
+            : <Movies movies={movies} nextPage={nextPage} prevPage={prevPage} page={page} />
         }
+
       </main>
 
     </div>

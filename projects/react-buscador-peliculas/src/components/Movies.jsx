@@ -21,12 +21,29 @@ function NoMoviesResult () {
   )
 }
 
-export function Movies ({ movies }) {
+export function Movies ({ movies, nextPage, prevPage, page }) {
   const hasMovies = movies?.length > 0
+
+  const handleNextClick = () => {
+    nextPage()
+  }
+
+  const handlePrevClick = () => {
+    prevPage()
+  }
 
   return (
     hasMovies
-      ? <ListOfMovies movies={movies} />
+      ? (
+        <>
+          <ListOfMovies movies={movies} />
+          <div className='buttons-page'>
+            <button disabled={page === 1} onClick={handlePrevClick}> {page === 1 ? '' : page - 1} </button>
+            <button disabled>{page}</button>
+            <button onClick={handleNextClick}> {page + 1} </button>
+          </div>
+        </>
+        )
       : <NoMoviesResult />
   )
 }
