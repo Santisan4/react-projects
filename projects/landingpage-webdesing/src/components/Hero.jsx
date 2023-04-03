@@ -5,10 +5,10 @@ export function Hero () {
     <section className='min-h-[90vh] grid grid-cols-1 gap-8 p-[30px] md:grid-cols-1 md:p-0 md:gap-0 xl:grid-cols-2 xl:py-0 xl:my-0 '>
       {/* Information */}
       <div className='flex flex-col gap-8 md:px-20 md:gap-12 md:py-8 xl:flex xl:pl-40 xl:p-0 xl:justify-center xl:pb-20'>
-        <h1 className='text-[60px] font-bold leading-[110px] text-terceary md:text-center'>
+        <h1 className='text-[60px] font-bold leading-[90px] xl:leading-[110px] text-terceary md:text-center'>
           We Design Impactful <br />
           Digital{' '}
-          <span className='text-primary py-2 px-6 border-8 border-primary relative -z-10 '>
+          <span className='text-primary px-4 border-8 border-primary relative -z-10 '>
             Products
             <RiCheckboxBlankCircleFill className='text-white text-base absolute -left-5 -top-5  p-2 bg-primary rounded-full box-content' />
             <RiCheckboxBlankCircleFill className='text-white text-base absolute -right-5 -top-5  p-2 bg-primary rounded-full box-content' />
@@ -16,9 +16,9 @@ export function Hero () {
             <RiCheckboxBlankCircleFill className='text-white text-base absolute -left-5 -bottom-5  p-2 bg-primary rounded-full box-content' />
           </span>
         </h1>
-        <p className='text-fourth font-normal leading-[36px] opacity-[.8] md:text-[22px] md:text-center'>
-          Help find solutions with intuitive and in accordance <br />
-          with client business goals. we provide a high-quality <br />
+        <p className='text-fourth font-normal leading-[30px] xl:leading-[36px] opacity-[.8] md:text-[22px] md:text-center'>
+          Help find solutions with intuitive and in accordance <br className='hidden xl:visible' />
+          with client business goals. we provide a high-quality <br className='hidden' />
           services
         </p>
         <div className='flex flex-col xl:flex-row xl:justify-center items-center gap-5 md:gap-10'>
