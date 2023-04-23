@@ -6,10 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "workspaces": [
-    "projects/*",
-    "packages/*"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Santisan4/all-react.git"
