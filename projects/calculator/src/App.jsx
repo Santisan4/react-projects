@@ -4,36 +4,60 @@ import './App.css'
 import { RiMoonLine, RiSunLine } from 'react-icons/ri'
 
 export default function App () {
-  const [result, setResult] = useState('')
+  const [displayValue, setDisplayValue] = useState('0')
+  const [firstValue, setFirstValue] = useState(null)
+  const [operator, setOperator] = useState(null)
+  const [waitingForSecondValue, setWaitingForSecondValue] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
 
   const handleClickDarkMode = () => {
     setDarkMode(!darkMode)
   }
 
-  const handleClick = (e) => {
-    setResult(result.concat(e.target.name))
-  }
+  const handleButtonPress = (e) => {
+    const buttonValue = e.target.value
 
-  const clear = () => {
-    setResult('')
-  }
-
-  const backSpace = () => {
-    setResult(result.slice(0, -1))
-  }
-
-  const calculate = () => {
-    try {
-      // eslint-disable-next-line no-eval
-      setResult(eval(result).toString())
-    } catch {
-      setResult('Error')
+    // Manejar números
+    if (!isNaN(buttonValue)) {
+      if (displayValue === '0' || waitingForSecondValue) {
+        setDisplayValue(buttonValue)
+        setWaitingForSecondValue(false)
+      } else {
+        setDisplayValue(displayValue + buttonValue)
+      }
     }
-  }
 
-  const handleClickBrand = () => {
-    window.alert('Hecho por santidev')
+    // Manejar operadores
+    if (['+', '-', '*', '/'].includes(buttonValue)) {
+      setOperator(buttonValue)
+      setFirstValue(parseFloat(displayValue))
+      setWaitingForSecondValue(true)
+    }
+
+    // Manejar el botón de igual
+    if (buttonValue === '=') {
+      const secondValue = parseFloat(displayValue)
+
+      if (operator === '+') {
+        setDisplayValue(firstValue + secondValue)
+      } else if (operator === '-') {
+        setDisplayValue(firstValue - secondValue)
+      } else if (operator === '*') {
+        setDisplayValue(firstValue * secondValue)
+      } else if (operator === '/') {
+        setDisplayValue(firstValue / secondValue)
+      }
+
+      setWaitingForSecondValue(true)
+    }
+
+    // Manejar el botón de borrar
+    if (buttonValue === 'C') {
+      setDisplayValue('0')
+      setFirstValue(null)
+      setOperator(null)
+      setWaitingForSecondValue(false)
+    }
   }
 
   return (
@@ -45,33 +69,29 @@ export default function App () {
             <p><RiMoonLine className={`icon-mode ${darkMode ? 'active' : 'disable'} `} onClick={handleClickDarkMode} /></p>
           </div>
 
-          <p className={`numbers ${darkMode ? 'input-dark' : ''}`}>
-            {result}
-          </p>
+          <input className={`input ${darkMode ? 'dark-mode' : ''}`} type='text' value={displayValue} readOnly />
         </article>
 
         <div className='board'>
+          <button value='7' onClick={handleButtonPress}>7</button>
+          <button value='8' onClick={handleButtonPress}>8</button>
+          <button value='9' onClick={handleButtonPress}>9</button>
+          <button value='+' onClick={handleButtonPress}>+</button>
 
-          <button onClick={clear} id='clear'>C</button>
-          <button onClick={backSpace} id='backspace'>CE</button>
-          <button name='/' onClick={handleClick}> / </button>
-          <button name='*' onClick={handleClick}> * </button>
-          <button name='7' onClick={handleClick}> 7 </button>
-          <button name='8' onClick={handleClick}> 8 </button>
-          <button name='9' onClick={handleClick}> 9 </button>
-          <button name='+' onClick={handleClick}> + </button>
-          <button name='4' onClick={handleClick}> 4 </button>
-          <button name='5' onClick={handleClick}> 5 </button>
-          <button name='6' onClick={handleClick}> 6 </button>
-          <button name='-' onClick={handleClick}> - </button>
-          <button name='1' onClick={handleClick}> 1 </button>
-          <button name='2' onClick={handleClick}> 2 </button>
-          <button name='3' onClick={handleClick}> 3 </button>
-          <button onClick={calculate} id='result'> = </button>
-          <button name='.' onClick={handleClick}> . </button>
-          <button name='0' onClick={handleClick}> 0 </button>
-          <button onClick={handleClickBrand}>By</button>
-          <button onClick={handleClickBrand}>SD</button>
+          <button value='4' onClick={handleButtonPress}>4</button>
+          <button value='5' onClick={handleButtonPress}>5</button>
+          <button value='6' onClick={handleButtonPress}>6</button>
+          <button value='-' onClick={handleButtonPress}>-</button>
+
+          <button value='1' onClick={handleButtonPress}>1</button>
+          <button value='2' onClick={handleButtonPress}>2</button>
+          <button value='3' onClick={handleButtonPress}>3</button>
+          <button value='*' onClick={handleButtonPress}>*</button>
+
+          <button value='0' onClick={handleButtonPress}>0</button>
+          <button value='=' onClick={handleButtonPress}> = </button>
+          <button value='C' onClick={handleButtonPress}> C </button>
+          <button value='/' onClick={handleButtonPress}>/</button>
 
         </div>
 
