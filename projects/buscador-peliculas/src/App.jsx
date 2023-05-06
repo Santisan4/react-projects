@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
 import { useSearch } from './hooks/useSearch'
 import debounce from 'just-debounce-it'
 import './App.css'
-import { useCallback } from 'react'
 
 function App() {
   const [sort, setSort] = useState(false)
