@@ -33,9 +33,10 @@ main{
   flex-direction: column;
   align-items: center;
   list-style: none;
+  gap: 10px;
 }
 
-.movie h3{
+.movie h3, .movie p{
   margin: 0;
 }
 

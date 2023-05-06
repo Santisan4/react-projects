@@ -1,44 +1,21 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
+import { useSearch } from './hooks/useSearch'
+import debounce from 'just-debounce-it'
 import './App.css'
-
-function useSearch() {
-  const [search, setSearch] = useState('')
-  const [error, setError] = useState(null)
-  const firstInputRef = useRef(true)
-
-  useEffect(() => {
-    // Validamos que sea el primer intento de busqueda
-    if (firstInputRef.current) {
-      firstInputRef.current = search === ''
-      return
-    }
-
-    // Validar que la busqueda no este vacia
-    if (search === '') {
-      setError('Debes ingresar un texto')
-      return
-    }
-
-    if (search.length < 3) {
-      setError('Debes ingresar al menos 3 caracteres')
-      return
-    }
-
-    setError(null)
-
-  }, [search])
-
-
-
-  return { search, setSearch, error }
-}
+import { useCallback } from 'react'
 
 function App() {
   const [sort, setSort] = useState(false)
   const { search, setSearch, error } = useSearch()
   const { movies, getMovies, loading } = useMovies({ search, sort })
+
+  const debounceGetMovies = useCallback(
+    debounce(search => {
+      getMovies({ search })
+    }, 300)
+    , [getMovies])
 
   const handleSort = () => {
     setSort(!sort)
@@ -47,6 +24,7 @@ function App() {
   const handleChange = (event) => {
     const newSearch = event.target.value
     setSearch(newSearch)
+    debounceGetMovies(newSearch)
   }
 
   const handleSubmit = (event) => {
@@ -60,6 +38,7 @@ function App() {
         <h1>Buscador de peliculas</h1>
         <form className='form' onSubmit={handleSubmit}>
           <input
+            autoFocus
             style={{
               border: '1px solid transparent',
               borderColor: error ? 'red' : 'transparent'
