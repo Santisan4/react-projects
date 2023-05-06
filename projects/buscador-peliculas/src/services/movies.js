@@ -4,7 +4,7 @@ export const searchMovies = async ({ search }) => {
   // Validamos que el parámetro search no esté vacío
   if (search === '') return
 
-  return fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${search}`)
+  return fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${search}`)
     .then((res) => res.json())
     .then((data) => {
       const movies = data.Search
