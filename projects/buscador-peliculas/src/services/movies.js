@@ -1,4 +1,4 @@
-const API_KEY = '15e94cba'
+const API_KEY = process.env.API_KEY
 
 export const searchMovies = async ({ search }) => {
   // Validamos que el parámetro search no esté vacío
@@ -14,10 +14,10 @@ export const searchMovies = async ({ search }) => {
         title: movie.Title,
         year: movie.Year,
         type: movie.Type,
-        poster: movie.Poster,
+        poster: movie.Poster
       }))
     })
-    .catch((error) => {
+    .catch(_error => {
       throw new Error('Error: movie not found! try with another title')
     })
 }
